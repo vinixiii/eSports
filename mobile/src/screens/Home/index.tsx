@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Image, ScrollView, View } from 'react-native';
 
 import logoImg from '../../assets/logo.png';
 
-import { GameCard } from '../../components/GameCard';
+import { Game, GameCard } from '../../components/GameCard';
 import { Heading } from '../../components/Heading';
-
-import { GAMES } from '../../utils/games';
 
 import { styles } from './styles';
 
+const IP = process.env.IP;
+
 export function Home() {
+  const [games, setGames] = useState<Game[]>([]);
+
+  useEffect(() => {
+    fetch(`http://${IP}/games`)
+      .then(res => res.json())
+      .then(data => {
+        setGames(data);
+      });
+  }, []);
+
   return (
     <ScrollView
       style={styles.container}
@@ -24,7 +34,7 @@ export function Home() {
       />
 
       <FlatList
-        data={GAMES}
+        data={games}
         keyExtractor={item => item.id}
         renderItem={({ item }) => <GameCard data={item} />}
         horizontal

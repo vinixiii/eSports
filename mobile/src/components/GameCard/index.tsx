@@ -7,6 +7,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import { THEME } from '../../theme';
+import { CustomTouchableOpacity } from '../CustomTouchableOpacity';
 
 import { styles } from './styles';
 
@@ -31,13 +32,13 @@ export function GameCard({ data, ...rest }: GameCardProps) {
   } = data;
 
   return (
-    <TouchableOpacity style={styles.container} {...rest}>
+    <CustomTouchableOpacity style={styles.container} {...rest}>
       <ImageBackground style={styles.cover} source={{ uri: bannerUrl }}>
         <LinearGradient style={styles.footer} colors={THEME.COLORS.FOOTER}>
           <Text style={styles.name}>{title}</Text>
           <Text style={styles.ads}>{ads} anúncios</Text>
         </LinearGradient>
       </ImageBackground>
-    </TouchableOpacity>
+    </CustomTouchableOpacity>
   );
 }

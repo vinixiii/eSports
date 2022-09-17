@@ -33,7 +33,10 @@ export function HomeScreen() {
   return (
     <Background>
       <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+        <ScrollView
+          contentContainerStyle={styles.content}
+          showsVerticalScrollIndicator={false}
+        >
           <Image style={styles.logo} source={logoImg} />
 
           <Heading
@@ -42,6 +45,8 @@ export function HomeScreen() {
           />
 
           <FlatList
+            style={styles.listContainer}
+            contentContainerStyle={styles.listContent}
             data={games}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
@@ -52,7 +57,6 @@ export function HomeScreen() {
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.listContent}
           />
         </ScrollView>
       </SafeAreaView>
